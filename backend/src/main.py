@@ -14,6 +14,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
+pipeline = None
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Initialize the try-on pipeline on startup"""
@@ -34,7 +36,8 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Fashion Try-On API",
     description="API for virtual fashion try-on using AI",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # Add CORS middleware
